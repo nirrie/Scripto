@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Index() {
   return (
