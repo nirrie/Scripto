@@ -1,4 +1,5 @@
 import { Text, View, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function Index() {
@@ -12,7 +13,9 @@ export default function Index() {
       colors={['#4c669f', ' #192f6a']}
       style={styles.button}>
       <Text style={styles.text}>Scripto</Text>
-    </LinearGradient>
+      </LinearGradient>
+      <Link href="/saved" style={styles.button}>
+      </Link>
     </View>
   );
 }
