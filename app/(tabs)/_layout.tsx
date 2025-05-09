@@ -5,8 +5,16 @@ export default function TabsLayout() {
     return (
         <Tabs
             screenOptions={{
-                tabBarActiveTintColor: ' #ffd33d',
-                
+                tabBarActiveTintColor: '#72401A',
+                tabBarInactiveTintColor: '#FBEDE0',
+                headerStyle: {
+                    backgroundColor: '#b88566',
+                },
+                headerShadowVisible: true,
+                headerTintColor: '#72401A',
+                tabBarStyle: {
+                    backgroundColor: '#b88566',
+                },
             }}
         >
             <Tabs.Screen
@@ -14,7 +22,7 @@ export default function TabsLayout() {
                 options={{
                     title: 'Home',
                     tabBarIcon: ({ color, focused }) => (
-                        <Ionicons name={focused ? 'pencil-sharp' : 'pencil-outline'} color={' #ee53cc'} size={24} />
+                        <Ionicons name={focused ? 'pencil-sharp' : 'pencil-outline'} color={color} size={24} />
                     ),
                 }}
             />
@@ -23,7 +31,7 @@ export default function TabsLayout() {
                 options={{
                     title: 'Saved',
                     tabBarIcon: ({ color, focused }) => (
-                        <Ionicons name={focused ? 'save-sharp' : 'save-outline'} color={' #ee53cc' } size={24} />
+                        <Ionicons name={focused ? 'save-sharp' : 'save-outline'} color={color} size={24} />
                     )
 
                 }} />
