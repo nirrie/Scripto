@@ -14,7 +14,7 @@ export default function TabsLayout() {
                 options={{
                     title: 'Home',
                     tabBarIcon: ({ color, focused }) => (
-                        <Ionicons name={focused ? ' pencil-sharp' : 'pencil-outline'} color={' #ee53cc'} size={24} />
+                        <Ionicons name={focused ? 'pencil-sharp' : 'pencil-outline'} color={' #ee53cc'} size={24} />
                     ),
                 }}
             />
@@ -23,7 +23,7 @@ export default function TabsLayout() {
                 options={{
                     title: 'Saved',
                     tabBarIcon: ({ color, focused }) => (
-                        <Ionicons name={focused ? 'save-sharp' : 'save-outline'} color={'#ee53cc' } size={24} />
+                        <Ionicons name={focused ? 'save-sharp' : 'save-outline'} color={' #ee53cc' } size={24} />
                     )
 
                 }} />

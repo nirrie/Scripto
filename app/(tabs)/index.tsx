@@ -4,19 +4,17 @@ import { LinearGradient } from "expo-linear-gradient";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <LinearGradient
-        colors={['rgba(244, 109, 221, 0.8)', 'transparent']}
-        style={styles.background}
-        />
-      <LinearGradient
-      colors={['#4c669f', ' #192f6a']}
-      style={styles.button}>
-      <Text style={styles.text}>Scripto</Text>
-      </LinearGradient>
+    <LinearGradient
+      colors={['#B88566', '#FAC3A5' , '#FBEDE0']}
+        locations={[0, 0.5, 1]}
+        style={styles.container}
+      >
+        <Text style={styles.text}>Scripto</Text>
+      
+      
       <Link href="/saved" style={styles.button}>
-      </Link>
-    </View>
+        </Link>
+        </LinearGradient>
   );
 }
 
@@ -25,23 +23,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'orange',
-  },
-  background: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    height: 300,
   },
   button: {
     padding: 20,
-    color: 'white',
     alignItems: 'center',
     borderRadius: 5,
+    marginTop: 20,
   },
   text: {
-    backgroundColor: 'transparent',
     fontSize: 20,
     color: 'white',
   },
