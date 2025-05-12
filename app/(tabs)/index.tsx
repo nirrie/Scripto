@@ -17,7 +17,7 @@ export default function Index() {
       
       <Link href="/saved" style={styles.button}>
       </Link>
-      <Button label="Write" style={styles.footerContainer} />
+      <Button icon="add-circle-outline" style={styles.footerContainer} />
         </LinearGradient>
   );
 }
@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     flex: 1 / 3,
     alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 
