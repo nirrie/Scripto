@@ -1,11 +1,14 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 import Button from "@/.expo/components/Button";
 
 
 
 export default function Index() {
+  const router = useRouter();
+  
   return (
     <LinearGradient
       colors={['#B88566', '#FAC3A5' , '#FBEDE0']}
