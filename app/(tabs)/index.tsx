@@ -1,6 +1,9 @@
 import { Text, View, StyleSheet } from "react-native";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import Button from "@/.expo/components/Button";
+
+
 
 export default function Index() {
   return (
@@ -13,7 +16,8 @@ export default function Index() {
       
       
       <Link href="/saved" style={styles.button}>
-        </Link>
+      </Link>
+      <Button label="Write" style={styles.footerContainer} />
         </LinearGradient>
   );
 }
@@ -33,6 +37,10 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     color: 'white',
+  },
+  footerContainer: {
+    flex: 1 / 3,
+    alignItems: 'center',
   },
 });
 
