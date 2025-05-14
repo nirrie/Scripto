@@ -15,7 +15,7 @@ export default function Index() {
         locations={[0, 0.5, 1]}
         style={styles.container}
       >
-        <Text style={styles.text}>Scripto</Text>
+        <Text style={styles.title}>Scripto</Text>
       
       
       <Link href="/saved" style={styles.button}>
@@ -31,15 +31,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  title: {
+    fontSize: 50,
+    fontFamily: 'Roboto',
+    color: '#B88566',
+    fontWeight: 'bold',
+    marginTop: 60,
+    marginBottom: 20,
+  },
   button: {
     padding: 20,
     alignItems: 'center',
     borderRadius: 5,
     marginTop: 20,
-  },
-  text: {
-    fontSize: 20,
-    color: 'white',
   },
   footerContainer: {
     flex: 1 / 3,

@@ -24,6 +24,7 @@ export default function TabsLayout() {
             <Tabs.Screen
                 name="index"
                 options={{
+                    headerShown: false,
                     title: 'Home',
                     tabBarIcon: ({ color, focused }) => (
                         <Ionicons name={focused ? 'pencil-sharp' : 'pencil-outline'} color={color} size={24} />
@@ -33,6 +34,7 @@ export default function TabsLayout() {
             <Tabs.Screen
                 name="saved"
                 options={{
+                    headerShown: false,
                     title: 'Saved',
                     tabBarIcon: ({ color, focused }) => (
                         <Ionicons name={focused ? 'save-sharp' : 'save-outline'} color={color} size={24} />
