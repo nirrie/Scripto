@@ -5,13 +5,17 @@ import { LinearGradient } from "expo-linear-gradient";
 export default function NotFoundScreen() {
     return (
         <>
-            <Stack.Screen options={{ title: 'Not found' }} />
+            <Stack.Screen options={{
+                headerShown: false,
+                title: 'Not found'
+            }}
+            />
                 <LinearGradient
                     colors={['#B88566', '#FAC3A5', '#FBEDE0']}
                     style={styles.container}
             >
                 <Link href="/" style={styles.link}>
-                Home
+                Not found, go back to home
                  </Link>
             </LinearGradient>
         </>
@@ -27,6 +31,6 @@ const styles = StyleSheet.create({
     link: {
         fontSize: 20,
         textDecorationLine: 'underline',
-        color: '#fff',
+        color: '#b88566',
     },
 });
