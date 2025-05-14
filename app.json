@@ -34,7 +34,12 @@
           "backgroundColor": "#ffffff"
         }
       ],
-      "expo-font"
+      [
+      "expo-font",
+      {
+        "fonts": ["./assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf"]
+            }
+          ]
     ],
     "experiments": {
       "typedRoutes": true
