@@ -8,7 +8,7 @@ export default function SavedScreen() {
       locations={[0, 0.5, 1]}
         style={styles.container}
         >
-      <Text style={styles.text}>Saved notes</Text>
+      <Text style={styles.title}>Saved notes</Text>
     </LinearGradient>
   );
 }
@@ -25,9 +25,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 20,
   },
-  text: {
-    fontSize: 20,
-    color: 'white',
+  title: {
+    fontSize: 50,
+    fontFamily: 'Roboto',
+    color: '#B88566',
+    fontWeight: 'bold',
+    marginTop: 60,
+    marginBottom: 20,
   },
 });
 
