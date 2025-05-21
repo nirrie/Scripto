@@ -28,18 +28,18 @@ export default function Index() {
         icon="add-circle-outline" style={styles.footerContainer}
         onPress={() => setShowNote(true)}
       />
-      {/*Modal for note*/}
       <Modal visible={ShowNote} animationType="slide" transparent={true}>
         <TouchableWithoutFeedback
           onPress={() => {
             Keyboard.dismiss();
+            setShowNote(false);
           }}
         >
           <View style={styles.modalContainer}>
             <TouchableWithoutFeedback onPress={() => {}}>
               <View style={styles.noteWrapper}>
                 <Note onClose={() => setShowNote(false)} />
-              </View>
+                </View>
           </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
@@ -72,13 +72,16 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     flex: 1,
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   noteWrapper: {
-    width: "90%",
-    backgroundColor: "#FBEDE0",
+    width: '90%',
+    height: '80%',
+    backgroundColor: '#fbede0',
     borderRadius: 12,
     padding: 20,
   },
