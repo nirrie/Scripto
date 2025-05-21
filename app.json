@@ -4,16 +4,20 @@
     "slug": "Scripto",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/favicon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nirrie.Scripto",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.nirrie.Scripto"
@@ -31,16 +35,23 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
+          "backgroundColor": "#fbede0"
         }
       ],
       [
-      "expo-font",
-      {
-        "fonts": ["./assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf"]
-            }
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf"
           ]
+        }
+      ]
     ],
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fbede0"
+    },
     "experiments": {
       "typedRoutes": true
     },
