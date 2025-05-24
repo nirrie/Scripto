@@ -10,12 +10,14 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Keyboard } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Button from "@/.expo/components/Button";
-import Note from "@/.expo/components/Note";
+import LoginModal from "@/components/LoginModal";
+import Button from "@/components/Button";
+import Note from "@/components/Note";
 
 export default function Index() {
   const router = useRouter();
   const [ShowNote, setShowNote] = useState(false);
+  const [ShowLogin, setShowLogin] = useState(false);
 
   return (
     <LinearGradient
