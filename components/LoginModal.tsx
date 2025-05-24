@@ -2,7 +2,7 @@ import { Modal, Text, View, StyleSheet, TextInput, Pressable } from "react-nativ
 import { useState } from "react";
 import { Link } from "expo-router";
 import { Alert } from "react-native";
-import useAsyncStorage from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from "../lib/api";
 
 export default function LoginModal({ visible, onClose }: { visible: boolean; onClose: () => void }) {
@@ -18,7 +18,7 @@ export default function LoginModal({ visible, onClose }: { visible: boolean; onC
 
             const token = response.data.token;
 
-            await useAsyncStorage.setItem("auth_token", token);
+            await AsyncStorage.setItem("auth_token", token);
 
             Alert.alert("Login successful");
             onClose();
