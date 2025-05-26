@@ -8,57 +8,66 @@ import api from "../lib/api";
 export default function LoginModal({ visible, onClose }: { visible: boolean; onClose: () => void }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const switchToRegister = () => {
+        onClose();
 
-    const handleLogin = async () => {
-        try {
-            const response = await api.post("/login", {
-                email,
-                password,
-            });
+        const handleLogin = async () => {
+            try {
+                const response = await api.post("/login", {
+                    email,
+                    password,
+                });
 
-            const token = response.data.token;
+                const token = response.data.token;
 
-            await AsyncStorage.setItem("auth_token", token);
+                await AsyncStorage.setItem("auth_token", token);
 
-            Alert.alert("Login successful");
-            onClose();
-        } catch (error: any) {
-            console.log(error);
-            Alert.alert("Login failed");
-        }
-    };
+                Alert.alert("Login successful");
+                onClose();
+            } catch (error: any) {
+                console.log(error);
+                Alert.alert("Login failed");
+            }
+        };
     
-    return (
-        <Modal visible={visible} animationType="slide" transparent={true}>
-            <View style={styles.overlay}>
-                <View style={styles.modalContainer}>
-                    <Text style={styles.title}>Login</Text>
-                    <TextInput
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={setEmail}
-                        keyboardType="email-address"
-                        style={styles.input}
-                    />
-                    <TextInput
-                        placeholder="Password"
-                        value={password}
-                        onChangeText={setPassword}
-                        secureTextEntry
-                        style={styles.input}
-                    />
-                    <Pressable onPress={handleLogin} style={styles.button}>
-                        <Text style={styles.buttonText}>Login</Text>
-                    </Pressable>
-                    <Pressable onPress={onClose} style={styles.cancel}>
-                        <Text style={styles.cancelText}>Cancel</Text>
-                    </Pressable>
+        return (
+            <Modal visible={visible} animationType="slide" transparent={true}>
+                <View style={styles.overlay}>
+                    <View style={styles.modalContainer}>
+                        <Text style={styles.title}>Login</Text>
+                        <TextInput
+                            placeholder="Email"
+                            value={email}
+                            onChangeText={setEmail}
+                            keyboardType="email-address"
+                            style={styles.input}
+                        />
+                        <TextInput
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                            style={styles.input}
+                        />
+                        <Pressable onPress={handleLogin} style={styles.button}>
+                            <Text style={styles.buttonText}>Login</Text>
+                        </Pressable>
+                        <Pressable onPress={onClose} style={styles.cancel}>
+                            <Text style={styles.cancelText}>Cancel</Text>
+                        </Pressable>
+                        <Text style={styles.linkText}>
+                            Don't have an account?{" "}
+                            <Text onPress={switchToRegister} style={styles.link}>
+                                Register
+                            </Text>
+                        </Text>
+                    </View>
                 </View>
-            </View>
             </Modal>
-    );
+        );
             
-}
+    }
+
 
 const styles = StyleSheet.create({
     overlay: {
@@ -99,4 +108,15 @@ const styles = StyleSheet.create({
     cancelText: {
         color: "#fff",
     },
-});
+    link: {
+        color: "#007BFF",
+        textDecorationLine: "underline",
+    },
+    linkText: {
+        marginTop: 20,
+        color: "#007BFF",
+    },
+})
+    
+}
+    
