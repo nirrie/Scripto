@@ -9,10 +9,11 @@ type Props = {
     visible: boolean;
     onClose: () => void;
     onRegisterSuccess: (token: string) => void;
+    onSwitchToLogin: () => void;
 };
 
 
-export default function RegisterModal({ visible, onClose, onRegisterSuccess }: Props) {
+export default function RegisterModal({ visible, onClose, onRegisterSuccess, onSwitchToLogin }: Props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -39,11 +40,18 @@ export default function RegisterModal({ visible, onClose, onRegisterSuccess }: P
             
             console.log(error);
         }
+    }
     
     return (
             <Modal visible={visible} animationType="slide" transparent={true}>
                 <View style={styles.overlay}>
-                    <View style={styles.modalContainer}>
+                <View style={styles.modalContainer}>
+                    <Text style={styles.linkText}>
+                        Already have an account?{" "}
+                        <Text onPress={onSwitchToLogin} style={styles.link}>
+                            Login
+                        </Text>
+                    </Text>
                     <Text style={styles.title}>Login</Text>
                     <TextInput
                         placeholder="Name"
@@ -85,44 +93,52 @@ export default function RegisterModal({ visible, onClose, onRegisterSuccess }: P
             
     }
 
-    const styles = StyleSheet.create({
-        overlay: {
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-        },
-        modalContainer: {
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-        },
-        title: {
-            fontSize: 24,
-        },
-        input: {
-            width: "80%",
-            padding: 10,
-            borderWidth: 1,
-            borderColor: "#ccc",
-            borderRadius: 5,
-            marginBottom: 20,
-        },
-        button: {
-            backgroundColor: "#007BFF",
-            padding: 10,
-            borderRadius: 5,
-            marginBottom: 10,
-        },
-        buttonText: {
-            color: "#fff",
-            fontWeight: "bold",
-        },
-        cancel: {
-            backgroundColor: "#FF0000",
-        },
-        cancelText: {
-            color: "#fff",
-        },
-    })
-};
+const styles = StyleSheet.create({
+    overlay: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+    modalContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    title: {
+        fontSize: 24,
+    },
+    input: {
+        width: "80%",
+        padding: 10,
+        borderWidth: 1,
+        borderColor: "#ccc",
+        borderRadius: 5,
+        marginBottom: 20,
+    },
+    button: {
+        backgroundColor: "#007BFF",
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
+    },
+    buttonText: {
+        color: "#fff",
+        fontWeight: "bold",
+    },
+    cancel: {
+        backgroundColor: "#FF0000",
+    },
+    cancelText: {
+        color: "#fff",
+    },
+    linkText: {
+        color: "#007BFF",
+        textDecorationLine: "underline",
+        marginBottom: 20,
+    },
+    link: {
+        color: "#007BFF",
+        textDecorationLine: "underline",
+    },
+});
