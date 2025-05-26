@@ -1,15 +1,18 @@
 import { Modal, Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import { useState } from "react";
-import { Link } from "expo-router";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from "../lib/api";
 
-export default function LoginModal({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+type Props = {
+    visible: boolean;
+    onClose: () => void;
+    onSwitchToRegister: () => void;
+};
+
+export default function LoginModal({ visible, onClose, onSwitchToRegister }: Props ) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const switchToRegister = () => {
-        onClose();
 
         const handleLogin = async () => {
             try {
@@ -57,7 +60,7 @@ export default function LoginModal({ visible, onClose }: { visible: boolean; onC
                         </Pressable>
                         <Text style={styles.linkText}>
                             Don't have an account?{" "}
-                            <Text onPress={switchToRegister} style={styles.link}>
+                            <Text onPress={onSwitchToRegister} style={styles.link}>
                                 Register
                             </Text>
                         </Text>
@@ -118,5 +121,5 @@ const styles = StyleSheet.create({
     },
 })
     
-}
+
     
