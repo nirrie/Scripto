@@ -13,11 +13,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import LoginModal from "@/components/LoginModal";
 import Button from "@/components/Button";
 import Note from "@/components/Note";
+import RegisterModal from "@/components/RegisterModal";
 
 export default function Index() {
   const router = useRouter();
   const [ShowNote, setShowNote] = useState(false);
   const [ShowLogin, setShowLogin] = useState(false);
+  const [ShowRegister, setShowRegister] = useState(false);
 
   return (
     <LinearGradient
@@ -33,13 +35,32 @@ export default function Index() {
         style={styles.footerContainer}
         onPress={() => setShowNote(true)}
       />
-      <Modal visible={ShowNote} animationType="slide" transparent={true}>
+      <LoginModal
+        visible={ShowLogin}
+        onClose={() => setShowLogin(false)}
+        onSwitchToRegister={() => {
+          setShowLogin(false);
+          setShowRegister(true);
+        }}
+      />
+      <RegisterModal
+        visible={ShowRegister}
+        onClose={() => setShowRegister(false)}
+        onRegisterSuccess={(token) => {
+          setShowRegister(false);
+          setShowLogin(false);
+        }}
+        onSwitchToLogin={() => {
+          setShowRegister(false);
+          setShowLogin(true);
+        }}
+      />
         <TouchableWithoutFeedback
           onPress={() => {
             Keyboard.dismiss();
             setShowNote(false);
           }}
-        >
+      >
           <View style={styles.modalContainer}>
             <TouchableWithoutFeedback onPress={() => {}}>
               <View style={styles.noteWrapper}>
@@ -48,9 +69,9 @@ export default function Index() {
             </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
-      </Modal>
-    </LinearGradient>
-  );
+    </LinearGradient >
+      
+    );
 }
 
 const styles = StyleSheet.create({
