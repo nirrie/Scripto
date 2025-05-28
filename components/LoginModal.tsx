@@ -8,9 +8,10 @@ type Props = {
     visible: boolean;
     onClose: () => void;
     onSwitchToRegister: () => void;
+    onLoginSuccess: (token: string) => void;
 };
 
-export default function LoginModal({ visible, onClose, onSwitchToRegister }: Props ) {
+export default function LoginModal({ visible, onClose, onSwitchToRegister, onLoginSuccess }: Props ) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
