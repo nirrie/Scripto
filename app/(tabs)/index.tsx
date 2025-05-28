@@ -38,6 +38,16 @@ export default function Index() {
     checkAuth();
   }, []);
 
+  const handleLoginSucces = async (token: string) => {
+    setIsAuthenticated(true);
+    setShowLogin(false);
+  };
+
+  const handleRegisterSucces = async (token: string) => {
+    setIsAuthenticated(true);
+    setShowRegister(false);
+  };
+
   return (
     <LinearGradient
       colors={["#B88566", "#FAC3A5", "#FBEDE0"]}
@@ -59,18 +69,16 @@ export default function Index() {
           setShowLogin(false);
           setShowRegister(true);
         }}
+        onLoginSuccess={handleLoginSucces}
       />
       <RegisterModal
         visible={ShowRegister}
         onClose={() => setShowRegister(false)}
-        onRegisterSuccess={(token) => {
-          setShowRegister(false);
-          setShowLogin(false);
-        }}
         onSwitchToLogin={() => {
           setShowRegister(false);
           setShowLogin(true);
         }}
+        onRegisterSuccess={handleRegisterSucces}
       />
         <TouchableWithoutFeedback
           onPress={() => {
