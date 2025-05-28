@@ -8,6 +8,8 @@ import {
 import { Link } from "expo-router";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import { useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Keyboard } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import LoginModal from "@/components/LoginModal";
@@ -18,8 +20,23 @@ import RegisterModal from "@/components/RegisterModal";
 export default function Index() {
   const router = useRouter();
   const [ShowNote, setShowNote] = useState(false);
-  const [ShowLogin, setShowLogin] = useState(false);
+  const [ShowLogin, setShowLogin] = useState(true);
   const [ShowRegister, setShowRegister] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = await AsyncStorage.getItem("auth_token");
+      if (token) {
+        setIsAuthenticated(true);
+        setShowLogin(false);
+      } else {
+        setIsAuthenticated(false);
+        setShowLogin(true);
+      }
+    };
+    checkAuth();
+  }, []);
 
   return (
     <LinearGradient
