@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import { useState } from "react";
+import { saveNote } from "@/lib/storage";
 
 type Props = {
     onClose: () => void;
@@ -7,6 +8,14 @@ type Props = {
 
 export default function Note({onClose}: Props) {
     const [note, setNote] = useState("");
+
+    const handleSaveNote = async () => {
+        if (note.trim()) {
+            await saveNote(note);
+            setNote("");
+            onClose();
+        };
+    }
     return (
         <View style={styles.container}>
             <TextInput
