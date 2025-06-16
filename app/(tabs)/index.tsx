@@ -40,6 +40,9 @@ export default function Index() {
   }, []);
 
   const handleLoginSucces = async (token: string) => {
+    await AsyncStorage.setItem("auth_token", token);
+    console.log("Login success handler triggered");
+
     setIsAuthenticated(true);
     setShowLogin(false);
   };
