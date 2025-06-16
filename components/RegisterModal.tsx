@@ -18,29 +18,36 @@ export default function RegisterModal({ visible, onClose, onRegisterSuccess, onS
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [password_confirmation, setPassword_confirmation] = useState("");
+    const [loading, setLoading] = useState(false);
 
 
 
     const handleRegister = async () => {
+
+        if (loading) return;
+        setLoading(true);
         try {
+            console.log("Attempting to register with name:", name, "email:", email);
+
             const response = await api.post<{ token: string }>("/register", {
                     name,
                     email,
                     password,
                     password_confirmation: password_confirmation,
-                });
+            });
             
             const token = response.data.token;
             await AsyncStorage.setItem("auth_token", token);
-            onRegisterSuccess(token);
+            Alert.alert("Registration succesfull! Login to continue.");
             onClose();
+            onSwitchToLogin();
         } catch (error: any) {
             if (error.response && error.response.data === 422) {
                 const messages = error.response.data.errors;
                 console.log("Validation Errors:", messages);
             }
         }
-            Alert.alert("Registration succesfull!");
+
         }
     
     return (
@@ -81,8 +88,8 @@ export default function RegisterModal({ visible, onClose, onRegisterSuccess, onS
                             secureTextEntry
                             style={styles.input}
                         />
-                        <Pressable onPress={handleRegister} style={styles.button}>
-                            <Text style={styles.buttonText}>Register</Text>
+                        <Pressable onPress={handleRegister} style={styles.button} disabled={loading}>
+                        <Text style={styles.buttonText}>{loading ? "Registering..." : "register"}</Text>
                         </Pressable>
                         <Pressable onPress={onClose} style={styles.cancel}>
                             <Text style={styles.cancelText}>Cancel</Text>
