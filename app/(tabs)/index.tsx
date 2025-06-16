@@ -27,6 +27,8 @@ export default function Index() {
 
   useEffect(() => {
     const checkAuth = async () => {
+      // Tijdelijk token verwijderen voor debugging
+      AsyncStorage.removeItem("auth_token");
       const token = await AsyncStorage.getItem("auth_token");
       if (token) {
         setIsAuthenticated(true);
