@@ -23,30 +23,50 @@ export default function RegisterModal({ visible, onClose, onRegisterSuccess, onS
 
 
     const handleRegister = async () => {
-
         if (loading) return;
         setLoading(true);
+
         try {
             console.log("Attempting to register with name:", name, "email:", email);
 
             const response = await api.post<{ token: string }>("/register", {
-                    name,
-                    email,
-                    password,
-                    password_confirmation: password_confirmation,
-            });
+                name,
+                email,
+                password,
+                password_confirmation: password_confirmation,
+            },
+                {
+                    headers: {
+                        Accept: "application/json",
+                    },
+                }
+            ); console.log("Full registration response:", response.data);
+                console.log("Full registration response:", response);
             
             const token = response.data.token;
-            await AsyncStorage.setItem("auth_token", token);
-            Alert.alert("Registration succesfull! Login to continue.");
-            onClose();
-            onSwitchToLogin();
-        } catch (error: any) {
-            if (error.response && error.response.data === 422) {
-                const messages = error.response.data.errors;
-                console.log("Validation Errors:", messages);
+
+            if (!token) {
+                console.error("No token returned from API, cannot store token");
+                return;
             }
+            await AsyncStorage.setItem("auth_token", token);
+            Alert.alert("Registration succesful! Login to continue");
+
+            console.log("Registration succes, calling onRegisterSucces");
+            onRegisterSuccess(token);
+        } catch (error: any) {
+            console.error("Registration failed", error);
+
+            if (error.response && error.response.data) {
+                console.log("Validation Errors:", error.response.data);
+                Alert.alert("Validation error:", JSON.stringify(error.response.data.errors, null, 2));
+            } else {
+                console.log("Unexpected error during registration", error.message);
+            }
+        } finally {
+            setLoading(false);
         }
+        console.log("RegisterModal is rendering. Visible", visible);
 
         }
     
@@ -107,6 +127,7 @@ export default function RegisterModal({ visible, onClose, onRegisterSuccess, onS
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             justifyContent: "center",
             alignItems: "center",
+            paddingBottom: 200,
         },
         modalContainer: {
             width: "85%",
