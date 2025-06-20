@@ -17,12 +17,14 @@ import LoginModal from "@/components/LoginModal";
 import Button from "@/components/Button";
 import Note from "@/components/Note";
 import RegisterModal from "@/components/RegisterModal";
+import WelcomeScreen from "@/components/WelcomeScreen";
 
 export default function Index() {
   const router = useRouter();
-  const [ShowNote, setShowNote] = useState(false);
-  const [ShowLogin, setShowLogin] = useState(true);
-  const [ShowRegister, setShowRegister] = useState(false);
+  const [ShowWelcome, setShowWelcome] = useState(false);
+  const [ShowLogin, setShowLogin] = useState(false);
+  const [ShowRegister, setShowRegister] = useState(false)
+  const [ShowNote, setShowNote] = useState(false);;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
@@ -32,8 +34,12 @@ export default function Index() {
       const token = await AsyncStorage.getItem("auth_token");
       if (token) {
         setIsAuthenticated(true);
-        setShowLogin(false);
+        setShowWelcome(false);
+        setShowRegister(false);
+        console.log("Token found, user is authenticated");
       } else {
+        console.log("No token found, showing welcome screen");
+        setShowWelcome(true);
         setIsAuthenticated(false);
         setShowLogin(true);
       }
@@ -41,18 +47,49 @@ export default function Index() {
     checkAuth();
   }, []);
 
+  const goToRegister = () => {
+    console.log("Navigating to register screen");
+    setShowWelcome(false);
+    setShowLogin(false);
+    setShowRegister(true);
+  };
+  const goToLogin = () => {
+    console.log("Navigating to login screen");
+    setShowWelcome(false);
+    setShowLogin(true);
+    setShowRegister(false);
+  };
+  const goToWelcome = () => {
+    console.log("Navigating to welcome screen");
+    setShowWelcome(true);
+    setShowLogin(false);
+    setShowRegister(false);
+  };
+
+   const handleRegisterSucces = async (token: string) => {
+     console.log("Register success handler triggered", token);
+     setIsAuthenticated(false);
+     setShowRegister(false);
+     setShowLogin(true);
+     setShowWelcome(false);
+  };
+
   const handleLoginSucces = async (token: string) => {
     await AsyncStorage.setItem("auth_token", token);
     console.log("Login success handler triggered");
 
     setIsAuthenticated(true);
-    setShowLogin(false);
+    setShowLogin(true);
   };
 
-  const handleRegisterSucces = async (token: string) => {
-    setIsAuthenticated(true);
-    setShowRegister(false);
-  };
+  console.log({
+    ShowWelcome,
+    ShowLogin,
+    ShowRegister,
+    isAuthenticated,
+    ShowNote,
+  });
+
 
   return (
     <LinearGradient
@@ -60,6 +97,9 @@ export default function Index() {
       locations={[0, 0.5, 1]}
       style={styles.container}
     >
+      {ShowWelcome && !isAuthenticated && (
+        <WelcomeScreen onLogin={goToLogin} onRegister={goToRegister} />
+      )}
       <Text style={styles.title}>Scripto</Text>
 
       <Link href="/saved" style={styles.button}></Link>
@@ -78,28 +118,30 @@ export default function Index() {
         onLoginSuccess={handleLoginSucces}
       />
       <RegisterModal
-        visible={ShowRegister}
-        onClose={() => setShowRegister(false)}
+        visible={ShowRegister && !isAuthenticated}
+        onClose={goToWelcome}
         onSwitchToLogin={() => {
           setShowRegister(false);
           setShowLogin(true);
         }}
         onRegisterSuccess={handleRegisterSucces}
       />
+      {ShowNote && (
         <TouchableWithoutFeedback
           onPress={() => {
             Keyboard.dismiss();
             setShowNote(false);
           }}
-      >
+        >
           <View style={styles.modalContainer}>
-            <TouchableWithoutFeedback onPress={() => {}}>
+            <TouchableWithoutFeedback onPress={() => { }}>
               <View style={styles.noteWrapper}>
                 <Note onClose={() => setShowNote(false)} />
               </View>
             </TouchableWithoutFeedback>
           </View>
         </TouchableWithoutFeedback>
+      )}
     </LinearGradient >
       
     );
