@@ -3,6 +3,7 @@ import {
   Modal,
   Text,
   View,
+  Image,
   TouchableWithoutFeedback,
   StyleSheet,
 } from "react-native";
@@ -19,6 +20,10 @@ import Note from "@/components/Note";
 import RegisterModal from "@/components/RegisterModal";
 import WelcomeScreen from "@/components/WelcomeScreen";
 
+export const screenOptions = {
+    headerShown: false,
+};
+
 export default function Index() {
   const router = useRouter();
   const [ShowWelcome, setShowWelcome] = useState(false);
@@ -29,7 +34,7 @@ export default function Index() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      // Tijdelijk token verwijderen voor debugging
+      // Tijdelijk token verwijderen voor debugging, omdat hij de token onthoud van de gebruiker.
       AsyncStorage.removeItem("auth_token");
       const token = await AsyncStorage.getItem("auth_token");
       if (token) {
@@ -39,7 +44,7 @@ export default function Index() {
         console.log("Token found, user is authenticated");
       } else {
         console.log("No token found, showing welcome screen");
-        setShowWelcome(true);
+        setShowWelcome(false);
         setIsAuthenticated(false);
         setShowLogin(true);
       }
@@ -79,7 +84,8 @@ export default function Index() {
     console.log("Login success handler triggered");
 
     setIsAuthenticated(true);
-    setShowLogin(true);
+    setShowLogin(false);
+    setShowWelcome(false);
   };
 
   console.log({
@@ -90,6 +96,12 @@ export default function Index() {
     ShowNote,
   });
 
+   if (ShowWelcome && !isAuthenticated) {
+        return (
+      <WelcomeScreen onLogin={goToLogin} onRegister={goToRegister} />
+        );
+      }
+
 
   return (
     <LinearGradient
@@ -97,10 +109,13 @@ export default function Index() {
       locations={[0, 0.5, 1]}
       style={styles.container}
     >
-      {ShowWelcome && !isAuthenticated && (
-        <WelcomeScreen onLogin={goToLogin} onRegister={goToRegister} />
-      )}
       <Text style={styles.title}>Scripto</Text>
+
+      <Image
+        source={require('@/assets/images/splash.png')}
+        style={styles.backgroundImage}
+      />
+        
 
       <Link href="/saved" style={styles.button}></Link>
       <Button
@@ -115,6 +130,7 @@ export default function Index() {
           setShowLogin(false);
           setShowRegister(true);
         }}
+        goToWelcome={goToWelcome}
         onLoginSuccess={handleLoginSucces}
       />
       <RegisterModal
@@ -124,6 +140,7 @@ export default function Index() {
           setShowRegister(false);
           setShowLogin(true);
         }}
+        goToWelcome={goToWelcome}
         onRegisterSuccess={handleRegisterSucces}
       />
       {ShowNote && (
@@ -160,6 +177,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 60,
     marginBottom: 20,
+  },
+  backgroundImage: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: 120,
+    height: 120,
+    opacity: 0.5,
+    resizeMode: 'contain',
   },
   button: {
     padding: 20,
