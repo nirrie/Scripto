@@ -3,10 +3,13 @@ import { Animated, View, Image, StyleSheet, Easing } from "react-native";
 import { Stack } from "expo-router";
 import { useFonts } from "expo-font";
 
+
 export default function RootLayout() {
-  const [loaded] = useFonts({
-    Roboto: require("../assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf"),
-  });
+    const [loaded] = useFonts({
+    Roboto: require("../assets/fonts/Roboto.ttf"),
+   });
+
+
   const spinAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(1)).current;
   const [isVisible, setIsVisible] = useState(true);
@@ -34,6 +37,10 @@ export default function RootLayout() {
     inputRange: [0, 1],
   outputRange: ['0deg', '360deg'],
   });
+  
+  if (!loaded) {
+return null; // or a loading screen
+}
     
   return (
     <>
