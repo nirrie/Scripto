@@ -4,7 +4,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabsLayout() {
       const [loaded] = useFonts({
-    Roboto: require('../../assets/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf'),
+    Roboto: require('../../assets/fonts/Roboto.ttf'),
   });
     return (
         <Tabs
