@@ -1,6 +1,8 @@
 import { Text, View, StyleSheet, TextInput, Pressable } from "react-native";
 import { useState } from "react";
-import { saveNote } from "@/lib/storage";
+import { Share } from "react-native";
+
+import { useNoteStore } from "@/lib/useNoteStore";
 
 type Props = {
     onClose: () => void;
@@ -8,10 +10,11 @@ type Props = {
 
 export default function Note({onClose}: Props) {
     const [note, setNote] = useState("");
+    const addNote = useNoteStore((state) => state.addNote);
 
-    const handleSaveNote = async () => {
+    const handleSaveNote = () => {
         if (note.trim()) {
-            await saveNote(note);
+            addNote(note);
             setNote("");
             onClose();
         };
@@ -25,7 +28,7 @@ export default function Note({onClose}: Props) {
                 style={styles.input}
                 multiline
             />
-            <Pressable style={styles.Button} onPress={() => alert("Note saved!")}>
+            <Pressable style={styles.Button} onPress={handleSaveNote}>
                 <Text>Save Note</Text>
             </Pressable>
                 
