@@ -10,10 +10,11 @@ type Props = {
     onClose: () => void;
     onRegisterSuccess: (token: string) => void;
     onSwitchToLogin: () => void;
+    goToWelcome: () => void;
 };
 
 
-export default function RegisterModal({ visible, onClose, onRegisterSuccess, onSwitchToLogin }: Props) {
+export default function RegisterModal({ visible, onClose, onRegisterSuccess, onSwitchToLogin, goToWelcome }: Props) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -111,7 +112,7 @@ export default function RegisterModal({ visible, onClose, onRegisterSuccess, onS
                         <Pressable onPress={handleRegister} style={styles.button} disabled={loading}>
                         <Text style={styles.buttonText}>{loading ? "Registering..." : "register"}</Text>
                         </Pressable>
-                        <Pressable onPress={onClose} style={styles.cancel}>
+                        <Pressable onPress={goToWelcome} style={styles.cancel}>
                             <Text style={styles.cancelText}>Cancel</Text>
                         </Pressable>
                     </View>
