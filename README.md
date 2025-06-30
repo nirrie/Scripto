@@ -1,50 +1,31 @@
-# Welcome to your Expo app 👋
+# ✍️ Scripto – Personal Note App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Scripto is a mobile note-taking app built with **React Native** and a **Laravel API**. The app allows users to write, save, and share notes — making it feel like a digital diary. This project is currently under development and serves as both a learning experience and a portfolio showcase.
 
-## Get started
+## 🚀 Features (Planned & In Progress)
+- ✅ User authentication (via Laravel Sanctum)
+- ✅ Create, save, and delete notes
+- 🕓 Share notes via native sharing
+- 🕓 Sync notes with backend
+- 🕓 Export to PDF (coming soon)
 
-1. Install dependencies
+## 🛠 Tech Stack
+### Frontend
+- React Native (Expo)
+- TypeScript
+- Zustand (state management)
+- AsyncStorage
 
-   ```bash
-   npm install
-   ```
+### Backend
+- Laravel
+- MySQL
+- Sanctum for API token authentication
 
-2. Start the app
+## 📚 Purpose
+This app is part of my journey as a software development student. I'm learning to build full-stack mobile apps with modern tools and real authentication systems. I aim to improve this project over time as I learn more about animations, API security, and clean architecture.
 
-   ```bash
-    npx expo start
-   ```
+## 🧪 Status
+**In progress** – I'm actively working on features, styling, and backend integration. Feedback and ideas are always welcome!
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 📫 Contact
+Feel free to reach out via [LinkedIn](https://linkedin.com/in/nirmin-backhaus) or check out more projects on [GitHub](https://github.com/nirrie).
